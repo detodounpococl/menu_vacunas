@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Portal Oficina Estadística · CESFAM Violeta Parra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08111C;
+  --bg2:#0d1725;
+  --card:#142030;
+  --card2:#101a29;
+  --border:rgba(0,180,180,.10);
+  --teal:#00C9A7;
+  --teal2:#00A68A;
+  --blue:#4A9EFF;
+  --amber:#FFBA49;
+  --coral:#FF6B6B;
+  --purple:#9B72FF;
+  --green:#4ADE80;
+  --red-cl:#D52B1E;
+  --text:#E2EEF9;
+  --text2:#8BAAC8;
+  --text3:#4D6B8A;
+  --mono:'JetBrains Mono', monospace;
+  --sans:'DM Sans', sans-serif;
+  --r:18px;
+  --r2:12px;
+  --shadow:0 18px 50px rgba(0,0,0,.24);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(circle at top right, rgba(74,158,255,.08), transparent 26%),
+    radial-gradient(circle at top left, rgba(0,201,167,.07), transparent 26%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+  font-family:var(--sans);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+a{text-decoration:none}
+.chile-bar{
+  height:4px;
+  background:linear-gradient(90deg,var(--red-cl) 0%,var(--red-cl) 33%,#fff 33%,#fff 66%,#1C3F6E 66%);
+  opacity:.72;
+}
+.header{
+  position:sticky; top:0; z-index:100;
+  background:rgba(8,17,28,.88);
+  backdrop-filter:blur(22px);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{
+  max-width:1280px; margin:0 auto; padding:14px 28px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+}
+.header-brand{display:flex; align-items:center; gap:14px}
+.header-logo{
+  width:46px; height:46px; border-radius:14px;
+  display:grid; place-items:center; font-size:22px;
+  background:linear-gradient(135deg,#1C3F6E,var(--teal));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.15), 0 12px 30px rgba(0,0,0,.2);
+}
+.header-brand-text h1{font-size:15px; font-weight:800; letter-spacing:-.3px}
+.header-brand-text p{font-size:11px; color:var(--text3); font-family:var(--mono)}
+.header-right{display:flex; align-items:center; gap:20px; flex-wrap:wrap}
+.header-author{display:flex; flex-direction:column; align-items:flex-end}
+.header-author strong{font-size:13px; font-weight:700}
+.header-author a{font-size:11px; color:var(--teal); font-family:var(--mono)}
+.header-author a:hover{text-decoration:underline}
+.live-dot{
+  display:inline-flex; align-items:center; gap:7px;
+  font-size:11px; color:var(--teal2); font-family:var(--mono)
+}
+.live-dot::before{
+  content:''; width:8px; height:8px; border-radius:50%;
+  background:var(--teal); box-shadow:0 0 0 4px rgba(0,201,167,.16);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.hero{
+  position:relative;
+  padding:78px 28px 28px;
+  overflow:hidden;
+}
+.hero::before{
+  content:''; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(0,201,167,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,201,167,.035) 1px, transparent 1px);
+  background-size:38px 38px;
+  pointer-events:none;
+}
+.hero::after{
+  content:''; position:absolute; inset:auto auto -100px 50%;
+  transform:translateX(-50%);
+  width:840px; height:420px;
+  background:radial-gradient(ellipse, rgba(0,201,167,.09), transparent 68%);
+  pointer-events:none;
+}
+.hero-content{
+  position:relative; z-index:1;
+  max-width:1280px; margin:0 auto;
+  display:grid; grid-template-columns:1.2fr .8fr; gap:24px; align-items:stretch;
+}
+.hero-panel, .hero-side{
+  background:linear-gradient(180deg, rgba(20,32,48,.86), rgba(16,26,41,.94));
+  border:1px solid var(--border);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+}
+.hero-panel{padding:34px}
+.hero-side{padding:24px}
+.hero-badge{
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(28,63,110,.34); border:1px solid rgba(74,158,255,.18);
+  border-radius:999px; padding:6px 14px;
+  font-size:12px; font-weight:700; color:var(--blue);
+  font-family:var(--mono); letter-spacing:.5px; margin-bottom:18px;
+}
+.hero-badge::before{content:'🇨🇱'; font-size:14px}
+.hero h2{
+  font-size:clamp(28px, 5vw, 46px);
+  font-weight:800; line-height:1.05; letter-spacing:-1.6px;
+  margin-bottom:14px;
+}
+.hero h2 span{
+  background:linear-gradient(135deg,var(--teal) 0%,var(--blue) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.hero-desc{
+  max-width:720px;
+  font-size:15px; color:var(--text2); line-height:1.75;
+  margin-bottom:24px;
+}
+.quick-links{
+  display:flex; gap:10px; flex-wrap:wrap;
+}
+.quick-link{
+  padding:11px 14px; border-radius:12px;
+  background:rgba(255,255,255,.035);
+  border:1px solid var(--border);
+  color:var(--text); font-size:12px; font-weight:700;
+}
+.quick-link:hover{border-color:rgba(74,158,255,.25); transform:translateY(-1px)}
+.side-title{
+  font-size:12px; text-transform:uppercase; letter-spacing:1.3px;
+  color:var(--text3); font-weight:700; margin-bottom:14px;
+}
+.side-stats{
+  display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;
+}
+.side-stat{
+  background:rgba(255,255,255,.03); border:1px solid var(--border);
+  border-radius:14px; padding:14px;
+}
+.side-stat .v{font-family:var(--mono); font-size:19px; font-weight:800}
+.side-stat .l{font-size:11px; color:var(--text3); margin-top:4px; text-transform:uppercase}
+.side-list{display:grid; gap:10px}
+.side-item{
+  display:flex; gap:10px; align-items:flex-start;
+  padding:12px 13px; border-radius:14px; background:rgba(255,255,255,.03); border:1px solid var(--border);
+}
+.side-item b{font-size:13px}
+.side-item span{display:block; font-size:12px; color:var(--text2); line-height:1.5}
+.side-icon{
+  width:30px; height:30px; flex-shrink:0; display:grid; place-items:center;
+  border-radius:9px; background:rgba(0,201,167,.12)
+}
+
+.portal-wrap{max-width:1280px; margin:0 auto; padding:28px}
+.section-head{
+  display:flex; align-items:end; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  margin-bottom:22px;
+}
+.section-label{
+  display:flex; align-items:center; gap:10px;
+  font-size:12px; font-weight:700; text-transform:uppercase;
+  letter-spacing:1.5px; color:var(--text3);
+}
+.section-label::before{content:''; width:4px; height:16px; background:var(--teal); border-radius:999px}
+.section-note{
+  font-size:12px; color:var(--text3); font-family:var(--mono)
+}
+.cards-grid{
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px;
+}
+@media (max-width:860px){.cards-grid{grid-template-columns:1fr}}
+.dash-card{
+  background:linear-gradient(180deg, rgba(20,32,48,.96), rgba(16,26,41,.98));
+  border:1px solid var(--border);
+  border-radius:22px; overflow:hidden; position:relative;
+  display:flex; flex-direction:column;
+  transition:transform .22s, box-shadow .22s, border-color .22s;
+  box-shadow:var(--shadow);
+}
+.dash-card:hover{transform:translateY(-5px)}
+.dash-card::before{content:''; position:absolute; inset:0 auto auto 0; width:100%; height:4px}
+.card-covid::before{background:linear-gradient(90deg,var(--teal),var(--teal2))}
+.card-flu::before{background:linear-gradient(90deg,var(--blue),var(--purple))}
+.card-pobl::before{background:linear-gradient(90deg,var(--amber),var(--coral))}
+.card-sar::before{background:linear-gradient(90deg,#ff7b72,#ffb86b)}
+.card-covid:hover{border-color:rgba(0,201,167,.34)}
+.card-flu:hover{border-color:rgba(74,158,255,.34)}
+.card-pobl:hover{border-color:rgba(255,186,73,.34)}
+.card-sar:hover{border-color:rgba(255,123,114,.34)}
+.card-inner{padding:28px 26px 22px; display:flex; flex-direction:column; gap:18px; flex:1}
+.card-top{display:flex; justify-content:space-between; gap:16px; align-items:flex-start}
+.card-icon{
+  width:56px; height:56px; border-radius:16px; display:grid; place-items:center; font-size:26px; flex-shrink:0
+}
+.card-covid .card-icon{background:rgba(0,201,167,.12)}
+.card-flu .card-icon{background:rgba(74,158,255,.12)}
+.card-pobl .card-icon{background:rgba(255,186,73,.12)}
+.card-sar .card-icon{background:rgba(255,123,114,.12)}
+.card-status{
+  display:inline-flex; align-items:center; gap:5px; white-space:nowrap;
+  font-size:11px; font-family:var(--mono); font-weight:700; padding:4px 10px; border-radius:999px
+}
+.status-live{background:rgba(0,201,167,.1); color:var(--teal)}
+.status-active{background:rgba(74,158,255,.1); color:var(--blue)}
+.status-sar{background:rgba(255,123,114,.1); color:#ff9f8f}
+.status-live::before, .status-active::before, .status-sar::before{
+  content:''; width:6px; height:6px; border-radius:50%; display:inline-block
+}
+.status-live::before{background:var(--teal)}
+.status-active::before{background:var(--blue)}
+.status-sar::before{background:#ff9f8f}
+.card-title{font-size:20px; font-weight:800; letter-spacing:-.4px}
+.card-subtitle{font-size:13px; color:var(--text2); line-height:1.65}
+.card-kpis{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
+.card-kpi{
+  background:rgba(255,255,255,.035);
+  border:1px solid var(--border);
+  border-radius:14px; padding:12px 12px 11px;
+}
+.card-kpi-val{font-family:var(--mono); font-size:17px; font-weight:800; line-height:1.1}
+.card-covid .card-kpi-val{color:var(--teal)}
+.card-flu .card-kpi-val{color:var(--blue)}
+.card-pobl .card-kpi-val{color:var(--amber)}
+.card-sar .card-kpi-val{color:#ff9f8f}
+.card-kpi-lbl{font-size:10px; color:var(--text3); margin-top:5px; text-transform:uppercase; letter-spacing:.5px}
+.card-tags{display:flex; gap:7px; flex-wrap:wrap}
+.card-tag{
+  font-size:11px; font-family:var(--mono); font-weight:700;
+  padding:4px 8px; border-radius:999px
+}
+.tag-teal{background:rgba(0,201,167,.1); color:var(--teal)}
+.tag-blue{background:rgba(74,158,255,.1); color:var(--blue)}
+.tag-amber{background:rgba(255,186,73,.1); color:var(--amber)}
+.tag-coral{background:rgba(255,107,107,.1); color:var(--coral)}
+.tag-purple{background:rgba(155,114,255,.1); color:var(--purple)}
+.tag-green{background:rgba(74,222,128,.1); color:var(--green)}
+.tag-sar{background:rgba(255,123,114,.1); color:#ff9f8f}
+.card-btn{
+  margin-top:auto;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:13px 16px; border-radius:14px;
+  font-size:13px; font-weight:800;
+}
+.card-covid .card-btn{background:rgba(0,201,167,.1); color:var(--teal)}
+.card-flu .card-btn{background:rgba(74,158,255,.1); color:var(--blue)}
+.card-pobl .card-btn{background:rgba(255,186,73,.1); color:var(--amber)}
+.card-sar .card-btn{background:rgba(255,123,114,.1); color:#ff9f8f}
+.card-btn-arrow{font-size:18px; transition:transform .15s}
+.dash-card:hover .card-btn-arrow{transform:translateX(4px)}
+.card-footer{
+  display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;
+  padding:12px 26px;
+  background:rgba(0,0,0,.18);
+  border-top:1px solid var(--border);
+  font-size:11px; color:var(--text3); font-family:var(--mono)
+}
+.card-footer-upd::before{content:'🕐 ';}
+
+.contexto-grid{
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-top:26px;
+}
+@media (max-width:1100px){.contexto-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.contexto-grid{grid-template-columns:1fr}}
+.inst-card{
+  background:linear-gradient(180deg, rgba(20,32,48,.94), rgba(16,26,41,.98));
+  border:1px solid var(--border); border-radius:18px; padding:18px;
+  display:flex; gap:14px; align-items:flex-start; box-shadow:var(--shadow)
+}
+.inst-icon{
+  width:38px; height:38px; border-radius:12px; flex-shrink:0; display:grid; place-items:center; font-size:18px
+}
+.inst-i1{background:rgba(28,63,110,.3)}
+.inst-i2{background:rgba(0,201,167,.12)}
+.inst-i3{background:rgba(255,186,73,.12)}
+.inst-i4{background:rgba(255,123,114,.12)}
+.inst-body h4{font-size:13px; font-weight:800; margin-bottom:4px}
+.inst-body p{font-size:12px; color:var(--text2); line-height:1.6}
+.footer{
+  max-width:1280px; margin:0 auto; padding:18px 28px 28px;
+  display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+  color:var(--text3); font-size:11px; border-top:1px solid var(--border)
+}
+@media (max-width:980px){
+  .hero-content{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .header-inner,.portal-wrap,.footer,.hero{padding-left:18px; padding-right:18px}
+  .hero-panel,.hero-side{padding:22px}
+  .card-kpis{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="chile-bar"></div>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-logo">📊</div>
+      <div class="header-brand-text">
+        <h1>Portal Oficina Estadística · CESFAM Violeta Parra</h1>
+        <p>Datos de salud · Chillán · Región de Ñuble</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="header-author">
+        <strong>Rodrigo Villalobos R.</strong>
+        <a href="mailto:rodrigo.villalobos@redsalud.gov.cl">rodrigo.villalobos@redsalud.gov.cl</a>
+      </div>
+      <div class="live-dot">Portal activo</div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-panel">
+      <div class="hero-badge">MINSAL · APS · Región de Ñuble</div>
+      <h2>Portal integrado de <span>dashboards sanitarios</span></h2>
+      <p class="hero-desc">
+        Acceso unificado a los principales tableros estadísticos del CESFAM Violeta Parra para seguimiento operativo, análisis epidemiológico y apoyo a la toma de decisiones en APS y SAR.
+      </p>
+      <div class="quick-links">
+        <a class="quick-link" href="https://detodounpococl.github.io/covid/">COVID-19</a>
+        <a class="quick-link" href="https://detodounpococl.github.io/dashboard-vacunas/">Influenza</a>
+        <a class="quick-link" href="https://detodounpococl.github.io/sar/">SAR</a>
+        <a class="quick-link" href="https://detodounpococl.github.io/poblacioninscrita/">Población inscrita</a>
+      </div>
+    </div>
+    <aside class="hero-side">
+      <div class="side-title">Resumen del portal</div>
+      <div class="side-stats">
+        <div class="side-stat">
+          <div class="v">4</div>
+          <div class="l">Dashboards</div>
+        </div>
+        <div class="side-stat">
+          <div class="v">24/7</div>
+          <div class="l">Acceso web</div>
+        </div>
+      </div>
+      <div class="side-list">
+        <div class="side-item">
+          <div class="side-icon">🏥</div>
+          <div><b>Gestión integrada</b><span>Monitoreo de vacunación, demanda SAR y población bajo control.</span></div>
+        </div>
+        <div class="side-item">
+          <div class="side-icon">📈</div>
+          <div><b>Uso directivo</b><span>Tableros pensados para jefaturas, coordinación clínica y evaluación de desempeño.</span></div>
+        </div>
+        <div class="side-item">
+          <div class="side-icon">🔒</div>
+          <div><b>Datos agregados</b><span>Visualizaciones sin información identificable de pacientes.</span></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<main class="portal-wrap">
+  <div class="section-head">
+    <div class="section-label">Dashboards disponibles</div>
+    <div class="section-note">Acceso rápido a tableros institucionales</div>
+  </div>
+
+  <div class="cards-grid">
+    <a class="dash-card card-covid" href="https://detodounpococl.github.io/covid/">
+      <div class="card-inner">
+        <div class="card-top">
+          <div class="card-icon">💉</div>
+          <div class="card-status status-live">En curso 2026</div>
+        </div>
+        <div>
+          <div class="card-title">Vacunación COVID-19</div>
+          <div class="card-subtitle">Seguimiento histórico de dosis, comportamiento anual de la campaña y análisis comparativo por vacunas aplicadas.</div>
+        </div>
+        <div class="card-kpis">
+          <div class="card-kpi"><div class="card-kpi-val">443K</div><div class="card-kpi-lbl">Dosis históricas</div></div>
+          <div class="card-kpi"><div class="card-kpi-val" style="font-size:12px">2021–2026</div><div class="card-kpi-lbl">Período</div></div>
+          <div class="card-kpi"><div class="card-kpi-val">6</div><div class="card-kpi-lbl">Vacunas</div></div>
+        </div>
+        <div class="card-tags">
+          <span class="card-tag tag-teal">Pfizer</span>
+          <span class="card-tag tag-teal">Moderna</span>
+          <span class="card-tag tag-amber">Sinovac</span>
+          <span class="card-tag tag-purple">AstraZeneca</span>
+          <span class="card-tag tag-coral">CanSino</span>
+        </div>
+        <div class="card-btn"><span>Abrir dashboard</span><span class="card-btn-arrow">→</span></div>
+      </div>
+      <div class="card-footer"><span class="card-footer-upd">Actualizado: 2026-03-19</span><span>CESFAM Violeta Parra</span></div>
+    </a>
+
+    <a class="dash-card card-flu" href="https://detodounpococl.github.io/dashboard-vacunas/">
+      <div class="card-inner">
+        <div class="card-top">
+          <div class="card-icon">🫁</div>
+          <div class="card-status status-live">En curso 2026</div>
+        </div>
+        <div>
+          <div class="card-title">Vacunación Influenza</div>
+          <div class="card-subtitle">Campaña anual de Influenza estacional con lectura histórica, comparación entre años y seguimiento por grupos de riesgo.</div>
+        </div>
+        <div class="card-kpis">
+          <div class="card-kpi"><div class="card-kpi-val" style="font-size:12px">2016–2026</div><div class="card-kpi-lbl">Período</div></div>
+          <div class="card-kpi"><div class="card-kpi-val">Anual</div><div class="card-kpi-lbl">Campaña</div></div>
+          <div class="card-kpi"><div class="card-kpi-val">APS</div><div class="card-kpi-lbl">Cobertura</div></div>
+        </div>
+        <div class="card-tags">
+          <span class="card-tag tag-blue">Trivalente</span>
+          <span class="card-tag tag-blue">Tetravalente</span>
+          <span class="card-tag tag-purple">Alto riesgo</span>
+          <span class="card-tag tag-amber">Adulto mayor</span>
+        </div>
+        <div class="card-btn"><span>Abrir dashboard</span><span class="card-btn-arrow">→</span></div>
+      </div>
+      <div class="card-footer"><span class="card-footer-upd">Actualizado: 2026-03-19</span><span>CESFAM Violeta Parra</span></div>
+    </a>
+
+    <a class="dash-card card-sar" href="https://detodounpococl.github.io/sar/">
+      <div class="card-inner">
+        <div class="card-top">
+          <div class="card-icon">🚑</div>
+          <div class="card-status status-sar">Urgencia APS</div>
+        </div>
+        <div>
+          <div class="card-title">Servicio de Alta Resolutividad · SAR</div>
+          <div class="card-subtitle">Análisis de demanda asistencial, horas punta, variación entre periodos, atenciones, inscritos, NSP y comportamiento operativo del SAR.</div>
+        </div>
+        <div class="card-kpis">
+          <div class="card-kpi"><div class="card-kpi-val">2019–2025</div><div class="card-kpi-lbl">Serie</div></div>
+          <div class="card-kpi"><div class="card-kpi-val">Mes / Hora</div><div class="card-kpi-lbl">Desagregación</div></div>
+          <div class="card-kpi"><div class="card-kpi-val">Directivo</div><div class="card-kpi-lbl">Uso</div></div>
+        </div>
+        <div class="card-tags">
+          <span class="card-tag tag-sar">Flujo horario</span>
+          <span class="card-tag tag-sar">Comparación anual</span>
+          <span class="card-tag tag-coral">NSP</span>
+          <span class="card-tag tag-green">Gestión de demanda</span>
+        </div>
+        <div class="card-btn"><span>Abrir dashboard</span><span class="card-btn-arrow">→</span></div>
+      </div>
+      <div class="card-footer"><span class="card-footer-upd">Actualizado: 2026-03-23</span><span>SAR · Red APS</span></div>
+    </a>
+
+    <a class="dash-card card-pobl" href="https://detodounpococl.github.io/poblacioninscrita/">
+      <div class="card-inner">
+        <div class="card-top">
+          <div class="card-icon">👥</div>
+          <div class="card-status status-active">Activo</div>
+        </div>
+        <div>
+          <div class="card-title">Población Inscrita</div>
+          <div class="card-subtitle">Seguimiento de población bajo control por establecimiento, estructura por edad y sexo, y distribución territorial.</div>
+        </div>
+        <div class="card-kpis">
+          <div class="card-kpi"><div class="card-kpi-val">2</div><div class="card-kpi-lbl">Establecimientos</div></div>
+          <div class="card-kpi"><div class="card-kpi-val">APS</div><div class="card-kpi-lbl">Nivel</div></div>
+          <div class="card-kpi"><div class="card-kpi-val">Sector</div><div class="card-kpi-lbl">Análisis</div></div>
+        </div>
+        <div class="card-tags">
+          <span class="card-tag tag-amber">CESFAM</span>
+          <span class="card-tag tag-green">CECOSF</span>
+          <span class="card-tag tag-blue">Edad y sexo</span>
+          <span class="card-tag tag-purple">Territorio</span>
+        </div>
+        <div class="card-btn"><span>Abrir dashboard</span><span class="card-btn-arrow">→</span></div>
+      </div>
+      <div class="card-footer"><span class="card-footer-upd">Actualizado: 2026-03-19</span><span>CESFAM · CECOSF Padre Hurtado</span></div>
+    </a>
+  </div>
+
+  <div class="section-head" style="margin-top:30px">
+    <div class="section-label">Acerca de este portal</div>
+    <div class="section-note">Fuente institucional y datos agregados</div>
+  </div>
+
+  <div class="contexto-grid">
+    <div class="inst-card">
+      <div class="inst-icon inst-i1">🏥</div>
+      <div class="inst-body">
+        <h4>CESFAM Violeta Parra · Chillán</h4>
+        <p>Portal de acceso a dashboards construidos a partir de registros internos y orientados a gestión sanitaria y seguimiento de programas.</p>
+      </div>
+    </div>
+    <div class="inst-card">
+      <div class="inst-icon inst-i2">📋</div>
+      <div class="inst-body">
+        <h4>Fuente de datos</h4>
+        <p>Información consolidada desde bases institucionales y actualizada periódicamente para uso estadístico y administrativo.</p>
+      </div>
+    </div>
+    <div class="inst-card">
+      <div class="inst-icon inst-i4">🚑</div>
+      <div class="inst-body">
+        <h4>Uso SAR</h4>
+        <p>El módulo SAR apoya análisis de demanda, redistribución de recursos, evaluación de horas punta y comparación de periodos.</p>
+      </div>
+    </div>
+    <div class="inst-card">
+      <div class="inst-icon inst-i3">🔒</div>
+      <div class="inst-body">
+        <h4>Privacidad</h4>
+        <p>Los dashboards muestran únicamente información estadística agregada. No contienen datos personales ni identificables.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <span style="font-family:var(--mono)">CESFAM Violeta Parra · Chillán · Región de Ñuble</span>
+  <span>Datos actualizados periódicamente desde registros internos del establecimiento</span>
+</footer>
+</body>
+</html>
